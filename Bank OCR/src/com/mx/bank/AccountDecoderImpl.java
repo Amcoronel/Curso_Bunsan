@@ -13,16 +13,16 @@ public class AccountDecoderImpl implements AccountDecoder {
 
 	private void initializeCodes() {
 		this.codes = new HashMap<String,String>();
-		codes.put("_|||_|","0");
-		codes.put("||","1");
-		codes.put("__||_","2");
-		codes.put("__|_|","3");
-		codes.put("|_||","4");
-		codes.put("_|__|","5");
-		codes.put("_|_|_|","6");
-		codes.put("_||","7");
-		codes.put("_|_||_|","8");
-		codes.put("_|_|||","9");
+		codes.put(" _ | ||_|","0");
+		codes.put("     |  |","1");
+		codes.put(" _  _||_ ","2");
+		codes.put(" _  _| _|","3");
+		codes.put("   |_|   |","4");
+		codes.put(" _ |_  _|","5");
+		codes.put(" _ |_ |_|","6");
+		codes.put(" _   |  |","7");
+		codes.put(" _ |_||_|","8");
+		codes.put(" _ |_| _|","9");
 	
 	}
 	
@@ -49,16 +49,12 @@ public class AccountDecoderImpl implements AccountDecoder {
 		for(int line = 0; line < DIGIT_SQUARE_SIZE; line++) {
 			String currentLine = codedLines[line];
 			String lineSegment =currentLine.substring(column,column + DIGIT_SQUARE_SIZE);
-			digitCode += trimLine(lineSegment);			
+			digitCode += lineSegment;			
 		}
 		
 		return decodeDigit(digitCode);
 	}
 
-	private String trimLine(String line) {
-		return line.replaceAll(BLANK_SPACE_REGEX, "");
-		
-	}
 	
 	private String decodeDigit(String segmentCode) {
 		String digit = codes.get(segmentCode);
